@@ -73,3 +73,14 @@ A backend_commit is called when etcd commits an incremental snapshot of its most
 Run the following script on each controlplane node
 
 `https://raw.githubusercontent.com/mattmattox/k8s-troubleshooting/master/kube-apiserver-check-etcd`
+
+# kubelet troubleshooting
+
+**Check kubelet logging**
+
+As this is the node agent, it will contain the most information regarding operations that it is executing based on scheduling requests
+
+
+**Check kubelet stats**
+
+`https://raw.githubusercontent.com/mattmattox/k8s-troubleshooting/master/kubelet-stats`
