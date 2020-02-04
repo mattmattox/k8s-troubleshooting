@@ -67,3 +67,9 @@ A wal_fsync is called when etcd persists its log entries to disk before applying
 **backend_commit_duration_seconds (99% under 25 ms)**
 
 A backend_commit is called when etcd commits an incremental snapshot of its most recent changes to disk.
+
+# kube-apiserver troubleshooting
+
+Run the following script on each controlplane node
+
+`https://raw.githubusercontent.com/mattmattox/k8s-troubleshooting/master/kube-apiserver-check-etcd`
