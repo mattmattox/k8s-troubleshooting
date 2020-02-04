@@ -54,3 +54,16 @@ The cluster state (/var/lib/etcd) contains wrong information to join the cluster
 
 ## Disabling debug logging
 `curl -XPUT -d '{"Level":"INFO"}' --cacert $(docker exec etcd printenv ETCDCTL_CACERT) --cert $(docker exec etcd printenv ETCDCTL_CERT) --key $(docker exec etcd printenv ETCDCTL_KEY) https://localhost:2379/config/local/log`
+
+## Getting etcd metrics
+`curl -X GET --cacert $(docker exec etcd printenv ETCDCTL_CACERT) --cert $(docker exec etcd printenv ETCDCTL_CERT) --key $(docker exec etcd printenv ETCDCTL_KEY) https://localhost:2379/metrics`
+
+
+**wal_fsync_duration_seconds (99% under 10 ms)**
+
+A wal_fsync is called when etcd persists its log entries to disk before applying them.
+
+
+**backend_commit_duration_seconds (99% under 25 ms)**
+
+A backend_commit is called when etcd commits an incremental snapshot of its most recent changes to disk.
