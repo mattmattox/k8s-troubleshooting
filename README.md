@@ -1,6 +1,18 @@
-# etcd-troubleshooting
+# k8s Troubleshooting
 
-## Check etcd members
+## kube-scheduler
+
+### Finding the current leader
+Command(s): `curl https://raw.githubusercontent.com/support-tools/troubleshooting-scripts/kube-scheduler/find-leader.sh | bash`
+
+**Example Output of a healthy cluster**
+```bash
+kube-scheduler is the leader on node a1ubk8slabl03
+```
+
+## etcd-troubleshooting
+
+### Check etcd members
 Command(s): `docker exec etcd etcdctl member list`
 
 **Example Output of a healthy cluster**
@@ -10,7 +22,7 @@ Command(s): `docker exec etcd etcdctl member list`
 bd37bc0dc2e990b6, started, etcd-a1ubrkeat02, https://172.27.5.32:2380, https://172.27.5.32:2379,https://172.27.5.32:4001, false
 ```
 
-## Check etcd endpoints
+### Check etcd endpoints
 Command(s): `curl https://raw.githubusercontent.com/mattmattox/etcd-troubleshooting/master/etcd-endpoints | bash `
 
 **Example Output of a healthy cluster**
@@ -23,7 +35,7 @@ Validating connection to https://172.27.5.32:2379/health
 {"health":"true"}
 ```
 
-## Common errors 
+### Common errors 
 
 `health check for peer xxx could not connect: dial tcp IP:2380: getsockopt: connection refused`
 
@@ -49,13 +61,13 @@ The node with the etcd instance logging rafthttp: request cluster ID mismatch 
 
 The cluster state (/var/lib/etcd) contains wrong information to join the cluster. The node should be removed from the cluster, the state directory should be cleaned and the node should be re-added.
 
-## Enabling debug logging
+### Enabling debug logging
 `curl -XPUT -d '{"Level":"DEBUG"}' --cacert $(docker exec etcd printenv ETCDCTL_CACERT) --cert $(docker exec etcd printenv ETCDCTL_CERT) --key $(docker exec etcd printenv ETCDCTL_KEY) https://localhost:2379/config/local/log`
 
-## Disabling debug logging
+### Disabling debug logging
 `curl -XPUT -d '{"Level":"INFO"}' --cacert $(docker exec etcd printenv ETCDCTL_CACERT) --cert $(docker exec etcd printenv ETCDCTL_CERT) --key $(docker exec etcd printenv ETCDCTL_KEY) https://localhost:2379/config/local/log`
 
-## Getting etcd metrics
+### Getting etcd metrics
 `curl -X GET --cacert $(docker exec etcd printenv ETCDCTL_CACERT) --cert $(docker exec etcd printenv ETCDCTL_CERT) --key $(docker exec etcd printenv ETCDCTL_KEY) https://localhost:2379/metrics`
 
 
@@ -74,7 +86,7 @@ Run the following script on each controlplane node
 
 `https://raw.githubusercontent.com/mattmattox/k8s-troubleshooting/master/kube-apiserver-check-etcd`
 
-# kubelet troubleshooting
+## kubelet troubleshooting
 
 **Check kubelet logging**
 
