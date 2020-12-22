@@ -3,7 +3,7 @@
 ## kube-scheduler
 
 ### Finding the current leader
-Command(s): `curl https://raw.githubusercontent.com/support-tools/troubleshooting-scripts/kube-scheduler/find-leader.sh | bash`
+Command(s): `curl https://raw.githubusercontent.com/mattmattox/k8s-troubleshooting/master/kube-scheduler | bash`
 
 **Example Output of a healthy cluster**
 ```bash
